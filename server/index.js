@@ -17,8 +17,8 @@ const io = new Server(server, { //io is the connection that we will be establish
 io.on("connection", (socket) => {   //Detects (listens for) connection events. When someone connects, we call the callback function print user ID obtained from prop.
   console.log(`User Connected: ${socket.id}`);
 
-  socket.on("join_room", (data) => {
-    socket.join(data);
+  socket.on("join_room", (data) => {    //Listens for the "join_room" event emitted by socket object from front end.
+    socket.join(data);    //Join room ID sent from front end as "data" prop
     console.log(`User with ID: ${socket.id} joined room: ${data}`);
   });
 
