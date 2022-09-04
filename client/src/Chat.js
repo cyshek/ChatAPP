@@ -18,8 +18,8 @@ function Chat({ socket, username, room }) {
       };
 
       await socket.emit("send_message", messageData);   //Lets back end know that message data has been sent
-      setMessageList((list) => [...list, messageData]);
-      setCurrentMessage("");
+      setMessageList((list) => [...list, messageData]);   //Allows user that sent the message to see their own message
+      setCurrentMessage("");    //Clears message text field
     }
   };
 
@@ -35,18 +35,18 @@ function Chat({ socket, username, room }) {
         <p>Live Chat</p>
       </div>
       <div className="chat-body">   //Where messages are displayed
-        <ScrollToBottom className="message-container">
+        <ScrollToBottom className="message-container">    //Auto scrolls to bottom for user
           {messageList.map((messageContent) => {
             return (
               <div
                 className="message"
-                id={username === messageContent.author ? "you" : "other"}
+                id={username === messageContent.author ? "you" : "other"}   //Determines which CSS id to use. If you sent the message, the message should be on the left and green.
               >
                 <div>
                   <div className="message-content">
                     <p>{messageContent.message}</p>
                   </div>
-                  <div className="message-meta">
+                  <div className="message-meta">    //Displayes who sent the message and the time that the message was sent.
                     <p id="time">{messageContent.time}</p>
                     <p id="author">{messageContent.author}</p>
                   </div>
@@ -65,7 +65,7 @@ function Chat({ socket, username, room }) {
             setCurrentMessage(event.target.value);    //Sets current message
           }}
           onKeyPress={(event) => {
-            event.key === "Enter" && sendMessage();
+            event.key === "Enter" && sendMessage();   //Send messages using "Enter" key
           }}
         />
         <button onClick={sendMessage}>&#9658;</button>    //Send message button
