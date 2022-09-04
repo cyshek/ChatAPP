@@ -1,11 +1,11 @@
-const express = require("express");
+const express = require("express");   
 const app = express();
-const http = require("http");
+const http = require("http");   //Need http to build server with Socket.io
 const cors = require("cors");
 const { Server } = require("socket.io");
-app.use(cors());
+app.use(cors());   //Cors is a library from Socket.io that helps detect and resolve bugs
 
-const server = http.createServer(app);
+const server = http.createServer(app);    //Create server by passing an express app
 
 const io = new Server(server, {
   cors: {
@@ -31,6 +31,6 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(3001, () => {
+server.listen(3001, () => {   //Listens for events on port 3001. When server runs, console outputs message, letting us know.
   console.log("SERVER RUNNING");
 });
