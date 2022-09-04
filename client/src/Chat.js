@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
 
 function Chat({ socket, username, room }) {
-  const [currentMessage, setCurrentMessage] = useState("");
+  const [currentMessage, setCurrentMessage] = useState("");   
   const [messageList, setMessageList] = useState([]);
 
-  const sendMessage = async () => {
+  const sendMessage = async () => {   //Async to wait for message to be sent
     if (currentMessage !== "") {
       const messageData = {
         room: room,
@@ -17,24 +17,24 @@ function Chat({ socket, username, room }) {
           new Date(Date.now()).getMinutes(),
       };
 
-      await socket.emit("send_message", messageData);
+      await socket.emit("send_message", messageData);   //Lets back end know that message data has been sent
       setMessageList((list) => [...list, messageData]);
       setCurrentMessage("");
     }
   };
 
-  useEffect(() => {
+  useEffect(() => {   //Front end listens to events in server, more specifically when back end emits message from front end. Allows user to recieve messages.
     socket.on("receive_message", (data) => {
       setMessageList((list) => [...list, data]);
     });
   }, [socket]);
 
   return (
-    <div className="chat-window">
+    <div className="chat-window">   //Chat UI component
       <div className="chat-header">
         <p>Live Chat</p>
       </div>
-      <div className="chat-body">
+      <div className="chat-body">   //Where messages are displayed
         <ScrollToBottom className="message-container">
           {messageList.map((messageContent) => {
             return (
@@ -56,19 +56,19 @@ function Chat({ socket, username, room }) {
           })}
         </ScrollToBottom>
       </div>
-      <div className="chat-footer">
+      <div className="chat-footer">   //Where user writes the messages
         <input
           type="text"
           value={currentMessage}
           placeholder="Hey..."
           onChange={(event) => {
-            setCurrentMessage(event.target.value);
+            setCurrentMessage(event.target.value);    //Sets current message
           }}
           onKeyPress={(event) => {
             event.key === "Enter" && sendMessage();
           }}
         />
-        <button onClick={sendMessage}>&#9658;</button>
+        <button onClick={sendMessage}>&#9658;</button>    //Send message button
       </div>
     </div>
   );
