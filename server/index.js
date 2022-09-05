@@ -23,7 +23,7 @@ io.on("connection", (socket) => {     //Detects (listens for) connection events.
   });
 
   socket.on("send_message", (data) => {     //Server listens for the message sent by the user.
-    socket.to(data.room).emit("receive_message", data);     //Server then sends the message back to the other user.
+    socket.to(data.room).emit("receive_message", data);     //Server then broadcasts the message to everyone in the room. Allows another user to recieve the message.
   });
 
   socket.on("disconnect", () => {     //Listens for when someone disconnects from server
