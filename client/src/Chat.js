@@ -46,7 +46,7 @@ function Chat({ socket, username, room }) {
                   <div className="message-content">
                     <p>{messageContent.message}</p>
                   </div>
-                  <div className="message-meta">    //Displayes who sent the message and the time that the message was sent.
+                  <div className="message-meta">    //Displays who sent the message and the time that the message was sent.
                     <p id="time">{messageContent.time}</p>
                     <p id="author">{messageContent.author}</p>
                   </div>
