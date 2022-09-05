@@ -20,8 +20,8 @@ function App() {
   return (
     <div className="App">
       {!showChat ? (
-        <div className="joinChatContainer">   //Initial container that user sees, containing input fields that accept name and room ID
-          <h3>Join A Chat</h3>    //Header
+        <div className="joinChatContainer">   /*Initial container that user sees, containing input fields that accept name and room ID*/
+          <h3>Join A Chat</h3>   
           <input
             type="text"
             placeholder="John..."
@@ -36,7 +36,7 @@ function App() {
               setRoom(event.target.value);
             }}
           />
-          <button onClick={joinRoom}>Join A Room</button>  //Listens for click and alerts back end about user's attempt to establish connection
+          <button onClick={joinRoom}>Join A Room</button>  /*Listens for click and alerts back end about user's attempt to establish connection*/
         </div>
       ) : (
         <Chat socket={socket} username={username} room={room} />
