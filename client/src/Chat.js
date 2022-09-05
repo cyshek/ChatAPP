@@ -23,7 +23,7 @@ function Chat({ socket, username, room }) {
     }
   };
 
-  useEffect(() => {     //Front end listens to events in server, more specifically when back end emits message from front end. Allows user to recieve messages.
+  useEffect(() => {     //Front end listens to events in server, more specifically when back end emits message from front end. useEffect renders the list of messages that both users see.
     socket.on("receive_message", (data) => {
       setMessageList((list) => [...list, data]);      //Update message list state
     });
