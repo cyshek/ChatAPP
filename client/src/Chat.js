@@ -5,8 +5,8 @@ function Chat({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState("");   
   const [messageList, setMessageList] = useState([]);
 
-  const sendMessage = async () => {     //Async to wait for message to be sent
-    if (currentMessage !== "") {
+  const sendMessage = async () => {     //Async to wait for message to be sent before updating the message list that both users see
+    if (currentMessage !== "") {        //Wait for user to type in a message before we construct a messageData object
       const messageData = {
         room: room,
         author: username,
@@ -62,13 +62,13 @@ function Chat({ socket, username, room }) {
           value={currentMessage}
           placeholder="Hey..."
           onChange={(event) => {
-            setCurrentMessage(event.target.value);      //Sets current message
+            setCurrentMessage(event.target.value);      //Sets current message when user starts typing a message
           }}
           onKeyPress={(event) => {
-            event.key === "Enter" && sendMessage();     //Send messages using "Enter" key
+            event.key === "Enter" && sendMessage();     //Allows user to send messages using "Enter" key
           }}
         />
-        <button onClick={sendMessage}>&#9658;</button>      //Send message button
+        <button onClick={sendMessage}>&#9658;</button>      //Send message button which also allows user to send message
       </div>
     </div>
   );
