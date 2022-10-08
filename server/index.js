@@ -1,4 +1,4 @@
-const express = require("express");   
+const express = require("express");   //Output from express JS file is returned to express object
 const app = express();
 const http = require("http");     //Need http to build server with Socket.io
 const cors = require("cors");
