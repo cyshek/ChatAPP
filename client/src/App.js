@@ -17,15 +17,15 @@ function App() {
     }
   };
 
-  return (
+  return (                  /*This portion determines whether to show the home screen or the chat screen content*/ 
     <div className="App">
       {!showChat ? (
-        <div className="joinChatContainer">       <!-- Initial container that user sees, containing input fields that accept name and room ID -->
+        <div className="joinChatContainer">       { /*Initial container that user sees, containing input fields that accept name and room ID*/ }
           <h3>Join A Chat</h3>   
           <input
             type="text"
             placeholder="John..."
-            onChange={(event) => {
+            onChange={(event) => {            { /*Access the updated data from the changed input field content and set the username*/ }
               setUsername(event.target.value);
             }}
           />
@@ -36,7 +36,7 @@ function App() {
               setRoom(event.target.value);
             }}
           />
-          <button onClick={joinRoom}>Join A Room</button>       <!-- Listens for click and alerts back end about user's attempt to establish connection -->
+          <button onClick={joinRoom}>Join A Room</button>       { /*Listens for click and alerts back end about user's attempt to establish connection to room*/ }
         </div>
       ) : (
         <Chat socket={socket} username={username} room={room} />
